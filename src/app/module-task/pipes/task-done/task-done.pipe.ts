@@ -8,6 +8,6 @@ export class TaskDonePipe implements PipeTransform {
     if (typeof value === "boolean") {
       return "false";
     }
-    return value.toDateString();
+    return value.toLocaleDateString();
   }
 }

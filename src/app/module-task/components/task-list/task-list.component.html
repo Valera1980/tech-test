@@ -49,6 +49,11 @@ class="table-list"
     >
       <mat-icon>delete</mat-icon>
     </button>
+    <mat-checkbox class="example-margin"
+      [checked]="element.done"
+      [disabled]="element.done"
+      (change)="done($event,element)">
+    </mat-checkbox>
   </td>
 </ng-container>
 

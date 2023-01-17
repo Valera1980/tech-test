@@ -35,4 +35,17 @@ export class TaskListLandComponent implements OnInit {
       })
     );
   }
+  done(model: ModelTask): void {
+    this.tasks$ = this._taskHttp.queryDone(model).pipe(
+      map((data) => {
+        this._snackBar.open("Marked as done successfully!", "", {
+          duration: 3000,
+        });
+        return data;
+      }),
+      switchMap(() => {
+        return this._taskHttp.queryList();
+      })
+    );
+  }
 }

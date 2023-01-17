@@ -50,4 +50,15 @@ export class TaskHttpService {
       })
       .pipe(catchError((e) => throwError(e)));
   }
+  queryDone(model: ModelTask): Observable<unknown> {
+    const date = new Date();
+    return this._http
+      .patch<unknown>(this._api + "/" + model.id, {
+        category: model.category,
+        description: model.description,
+        done: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+        label: model.label,
+      })
+      .pipe(catchError((e) => throwError(e)));
+  }
 }

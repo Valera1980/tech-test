@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
+import { MatCheckboxChange } from "@angular/material/checkbox";
 
 @Component({
   selector: "app-task-list",
@@ -30,10 +31,14 @@ export class TaskListComponent implements OnInit {
     "actions",
   ];
   @Output() eventDelete = new EventEmitter<ModelTask>();
+  @Output() eventDone = new EventEmitter<ModelTask>();
   constructor() {}
 
   ngOnInit(): void {}
   delete(task: ModelTask): void {
     this.eventDelete.emit(task);
+  }
+  done(event: MatCheckboxChange, task: ModelTask): void {
+    this.eventDone.emit(task);
   }
 }

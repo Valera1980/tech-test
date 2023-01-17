@@ -35,3 +35,7 @@ export function parseDate(value: string): Date | boolean {
   }
   return false;
 }
+
+export function getStringForData(date: Date): string {
+  return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+}

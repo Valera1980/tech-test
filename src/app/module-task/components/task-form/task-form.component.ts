@@ -16,6 +16,7 @@ import {
 import { ARRAY_TASK_CATEGORY } from "@module-task/enums/task-category.enum";
 import { ModelTask } from "@module-task/models/task.model";
 import { Subject } from "rxjs";
+import { getStringForData } from "@module-task/utils/task-done.util";
 
 @Component({
   selector: "app-task-form",
@@ -51,9 +52,14 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     });
     this.eventFormState.emit(!!this.form.valid);
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((data) => {
-      this.eventChange.emit(
-        new ModelTask({ ...data, ...{ done: data.done ? data.done : false } })
-      );
+      const override = {
+        ...data,
+        ...{ ...{ done: !!data.done ? getStringForData(data.done) : false } },
+      };
+      console.log("override");
+      console.log(override);
+
+      this.eventChange.emit(new ModelTask(override));
       this.eventFormState.emit(!!this.form.valid);
     });
   }

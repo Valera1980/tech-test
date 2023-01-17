@@ -65,6 +65,7 @@ export class TaskItemLandComponent implements OnInit, OnDestroy {
     );
   }
   change(task: ModelTask): void {
+    console.log(task);
     this.currentTask = task;
   }
   formState(state: boolean): void {
@@ -77,13 +78,14 @@ export class TaskItemLandComponent implements OnInit, OnDestroy {
     if (!this.currentTask.id) {
       this._taskHttp.queryCreate(this.currentTask).subscribe(() => {
         this._snackBar.open("Created successfully!", "", { duration: 3000 });
+        this._router.navigate(["/tasks/list"]);
       });
     } else {
       this._taskHttp.queryPatch(this.currentTask).subscribe(() => {
         this._snackBar.open("Edited successfully!", "", { duration: 3000 });
+        this._router.navigate(["/tasks/list"]);
       });
     }
-    this._router.navigate(["/tasks/list"]);
   }
   cancel(): void {
     this._router.navigate(["/tasks/list"]);

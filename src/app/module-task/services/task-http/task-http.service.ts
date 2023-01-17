@@ -1,3 +1,4 @@
+import { getStringForData } from "@module-task/utils/task-done.util";
 import { Nullable } from "@global-models/nullable.type";
 import { ModelTask, Task } from "./../../models/task.model";
 import { HttpClient } from "@angular/common/http";
@@ -27,9 +28,10 @@ export class TaskHttpService {
       .post<Task>(this._api, {
         category: model.category,
         description: model.description,
-        done: model.done,
+        done:
+          model.done === false ? "false" : getStringForData(model.done as Date),
         label: model.label,
-      } as Partial<Task>)
+      })
       .pipe(
         map((t) => new ModelTask(t)),
         catchError((e) => throwError(e))
@@ -56,7 +58,7 @@ export class TaskHttpService {
       .patch<unknown>(this._api + "/" + model.id, {
         category: model.category,
         description: model.description,
-        done: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+        done: getStringForData(model.done as Date),
         label: model.label,
       })
       .pipe(catchError((e) => throwError(e)));

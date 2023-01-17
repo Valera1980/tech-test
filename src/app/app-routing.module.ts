@@ -13,6 +13,16 @@ const routes: Routes = [
       (await import("./module-task-land/module-task-land.module"))
         .ModuleTaskLand,
   },
+  {
+    path: "page-404",
+    loadChildren: async () =>
+      (await import("app/module-page-not-found/module-page-not-found.module"))
+        .ModulePageNotFound,
+  },
+  {
+    path: "**",
+    redirectTo: "/page-404",
+  },
 ];
 
 @NgModule({

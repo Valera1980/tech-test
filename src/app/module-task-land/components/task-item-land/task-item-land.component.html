@@ -1,0 +1,20 @@
+<div class="task-item-land">
+    <div class="task-item-land__wrap">
+        <div class="task-item-land__title">
+           {{currentTitle}}
+       </div>
+    <div class="task-item-land__form">
+        <app-task-form 
+            *ngIf="currentTask"
+            [model]="currentTask" 
+            (eventChange)="change($event)" 
+            (eventFormState)="formState($event)">
+        </app-task-form>
+    </div>
+    <div class="task-item-land__bar">
+        <button [disabled]="!isFormValid" mat-raised-button color="primary" (click)="createOrEdit()">Save</button>
+        <button mat-raised-button (click)="cancel()">Cancel</button>  
+    </div>
+    </div>
+   
+</div>

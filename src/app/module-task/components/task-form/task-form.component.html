@@ -1,0 +1,42 @@
+<div class="task-form" [formGroup]="form">
+    <input formControlName="id" hidden>
+    <mat-form-field appearance="outline">
+        <mat-label>Label</mat-label>
+        <input
+          formControlName="label"
+          matInput
+        />
+        <mat-error>{{getErrorsLabel()}}</mat-error>
+      </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input
+          formControlName="description"
+          matInput
+        />
+        <mat-error>{{getErrorsDescription()}}</mat-error>
+     </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select
+        formControlName="category"
+      >
+        <mat-option
+          *ngFor="let table of categories"
+          [value]="table.value"
+        >
+          {{ table.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+       <mat-label>Done</mat-label>
+       <input matInput [matDatepicker]="picker" formControlName="done">
+       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+       <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+</div>

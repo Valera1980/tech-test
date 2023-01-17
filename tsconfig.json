@@ -23,6 +23,7 @@
       "@global-models/*": ["app/global-models/*"],
       "@module-task/*": ["app/module-task/*"],
       "@module-tasks-land/*": ["app/module-task-land/*"],
+      "@module-shared/*": ["app/module-shared/*"],
     }
   },
   "angularCompilerOptions": {

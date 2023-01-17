@@ -1,0 +1,19 @@
+.task-item-land{
+    padding: 30px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__title{
+        font-size: 20px;
+        padding: 0 0 40px 0;
+    }
+    &__bar{
+        display: flex;
+        align-items: center;
+        & > * {
+            &:not(:last-child) {
+              margin-right: 16px;
+            }
+          }
+    }
+}

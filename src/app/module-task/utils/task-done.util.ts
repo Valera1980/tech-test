@@ -28,10 +28,10 @@ export function parseDate(value: string): Date | boolean {
   if (
     array.length === 3 &&
     !isNaN(Number(array[2])) &&
-    !isNaN(Number(array[2])) &&
-    !isNaN(Number(array[2]))
+    !isNaN(Number(array[1])) &&
+    !isNaN(Number(array[0]))
   ) {
-    return new Date(Number(array[2]), Number(array[1]), Number(array[0]));
+    return new Date(Number(array[2]), Number(array[1]) - 1, Number(array[0]));
   }
   return false;
 }

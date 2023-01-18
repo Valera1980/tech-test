@@ -1,0 +1,19 @@
+.task-filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__controls{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 1;
+        margin-right: 24px;
+    }
+    &__item{
+        flex: 1;
+        margin-right: 12px;
+    }
+    &__btn{
+        margin-bottom: 25px;
+    }
+}

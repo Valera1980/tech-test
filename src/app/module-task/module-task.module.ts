@@ -10,6 +10,7 @@ import { TaskCategoryPipe } from "./pipes/task-category/task-category.pipe";
 import { TaskDonePipe } from "./pipes/task-done/task-done.pipe";
 import { ModuleShared } from "@module-shared/module-shared.module";
 import { TaskFormComponent } from "./components/task-form/task-form.component";
+import { TaskFiltersComponent } from "./components/task-filters/task-filters.component";
 
 @NgModule({
   declarations: [
@@ -17,8 +18,9 @@ import { TaskFormComponent } from "./components/task-form/task-form.component";
     TaskCategoryPipe,
     TaskDonePipe,
     TaskFormComponent,
+    TaskFiltersComponent,
   ],
-  exports: [TaskListComponent, TaskFormComponent],
+  exports: [TaskListComponent, TaskFormComponent, TaskFiltersComponent],
   imports: [
     CommonModule,
     HttpClientModule,

@@ -56,9 +56,6 @@ export class TaskFormComponent implements OnInit, OnDestroy {
         ...data,
         ...{ ...{ done: !!data.done ? getStringForData(data.done) : false } },
       };
-      console.log("override");
-      console.log(override);
-
       this.eventChange.emit(new ModelTask(override));
       this.eventFormState.emit(!!this.form.valid);
     });

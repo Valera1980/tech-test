@@ -1,0 +1,51 @@
+<div class="task-filters">
+    <div class="task-filters__controls" [formGroup]="form">
+    <mat-form-field appearance="outline" class="task-filters__item">
+        <mat-label>Label</mat-label>
+        <input
+          formControlName="label"
+          matInput
+        />
+      </mat-form-field>
+
+    <mat-form-field appearance="outline" class="task-filters__item">
+        <mat-label>Description</mat-label>
+        <input
+          formControlName="description"
+          matInput
+        />
+     </mat-form-field>
+
+    <mat-form-field appearance="outline" class="task-filters__item">
+        <mat-label>Category</mat-label>
+        <mat-select
+        formControlName="category"
+      >
+        <mat-option
+          *ngFor="let table of categories"
+          [value]="table.value"
+        >
+          {{ table.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="task-filters__item">
+        <mat-label>Date of done</mat-label>
+        <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Start date">
+          <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      
+      </mat-form-field>
+
+    <mat-checkbox class="task-filters__item" formControlName="done" >
+    </mat-checkbox>
+    </div>
+        <button mat-mini-fab color="primary" class="task-filters__btn">
+        <mat-icon>clear</mat-icon>
+       </button>
+
+</div>

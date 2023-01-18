@@ -1,16 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ModelTask } from "./../../models/task.model";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TaskListComponent } from './task-list.component';
+import { TaskListComponent } from "./task-list.component";
 
-describe('TaskListComponent', () => {
+describe("TaskListComponent", () => {
   let component: TaskListComponent;
   let fixture: ComponentFixture<TaskListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskListComponent ]
-    })
-    .compileComponents();
+      declarations: [TaskListComponent],
+      imports: [MatTableModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +23,7 @@ describe('TaskListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

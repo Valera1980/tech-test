@@ -11,6 +11,7 @@ import { TaskDonePipe } from "./pipes/task-done/task-done.pipe";
 import { ModuleShared } from "@module-shared/module-shared.module";
 import { TaskFormComponent } from "./components/task-form/task-form.component";
 import { TaskFiltersComponent } from "./components/task-filters/task-filters.component";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/compiler";
 
 @NgModule({
   declarations: [

@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/compiler";
 import { TaskItemLandComponent } from "./components/task-item-land/task-item-land.component";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";

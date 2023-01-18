@@ -5,13 +5,19 @@ import { ModelTask } from "@module-task/models/task.model";
 @Injectable()
 export class TaskFilterService {
   constructor() {}
+  // usually tasks like this implement on backend side
+  // so there is so many "ifs"
   filter(source: ModelTask[], filter: FilterTask): ModelTask[] {
     if (filter.category === "all") {
       const filtered = source
         .filter((t) => t.label.includes(filter.label))
         .filter((t) => t.description.includes(filter.description))
-
-        .filter((t) => t.done >= filter.start && t.done <= filter.end);
+        .filter((t) => {
+          if (filter.end && filter.start) {
+            return t.done >= filter.start && t.done <= filter.end;
+          }
+          return t;
+        });
 
       return filtered;
     } else {
@@ -19,7 +25,12 @@ export class TaskFilterService {
         .filter((t) => t.label.includes(filter.label))
         .filter((t) => t.description.includes(filter.description))
         .filter((t) => t.category === filter.category)
-        .filter((t) => t.done >= filter.start && t.done <= filter.end);
+        .filter((t) => {
+          if (filter.end && filter.start) {
+            return t.done >= filter.start && t.done <= filter.end;
+          }
+          return t;
+        });
       return filtered;
     }
   }

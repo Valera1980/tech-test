@@ -26,7 +26,7 @@ import { getStringForData } from "@module-task/utils/task-done.util";
 })
 export class TaskFormComponent implements OnInit, OnDestroy {
   readonly destroy$ = new Subject();
-  @Input() model: ModelTask;
+  @Input() model: ModelTask = new ModelTask();
   form: FormGroup;
   categories = ARRAY_TASK_CATEGORY;
   readonly minLengthLabel = 5;

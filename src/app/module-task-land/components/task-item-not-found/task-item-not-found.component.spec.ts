@@ -1,16 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
 
-import { TaskItemNotFoundComponent } from './task-item-not-found.component';
+import { TaskItemNotFoundComponent } from "./task-item-not-found.component";
 
-describe('TaskItemNotFoundComponent', () => {
+describe("TaskItemNotFoundComponent", () => {
   let component: TaskItemNotFoundComponent;
   let fixture: ComponentFixture<TaskItemNotFoundComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskItemNotFoundComponent ]
-    })
-    .compileComponents();
+      declarations: [TaskItemNotFoundComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +21,11 @@ describe('TaskItemNotFoundComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
+  });
+  it("should has title", () => {
+    const element = fixture.debugElement.query(By.css(".task-item-not-found"));
+    expect(element.nativeElement.innerText).toEqual("task item is not found");
   });
 });

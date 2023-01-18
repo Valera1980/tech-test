@@ -22,10 +22,10 @@
         formControlName="category"
       >
         <mat-option
-          *ngFor="let table of categories"
-          [value]="table.value"
+          *ngFor="let c of categories"
+          [value]="c.value"
         >
-          {{ table.viewValue }}
+          {{ c.viewValue }}
         </mat-option>
       </mat-select>
     </mat-form-field>

@@ -12,6 +12,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { ConfirmDialogComponent } from "./components/confirm-dialog/confirm-dialog.component";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [ConfirmDialogComponent],
@@ -28,6 +29,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatSnackBarModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   exports: [
     MatTableModule,
@@ -42,6 +44,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatCheckboxModule,
     ConfirmDialogComponent,
     MatDialogModule,
+    MatTooltipModule,
   ],
 })
 export class ModuleShared {}

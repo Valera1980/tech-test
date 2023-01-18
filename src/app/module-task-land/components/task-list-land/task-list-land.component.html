@@ -8,7 +8,10 @@
     </a>
     </div>
     <div class="div task-list-land__filters">
-      <app-task-filters></app-task-filters>
+      <app-task-filters 
+        (eventChange)="filterChange($event)" 
+        (eventClear)="clear()">
+      </app-task-filters>
     </div>
     <div class="div task-list-land__table">
         <app-task-list [tasks]="(tasks$|async)" (eventDelete)="delete($event)" (eventDone)="done($event)"></app-task-list>

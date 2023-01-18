@@ -1,4 +1,5 @@
-import { map, switchMap, takeUntil } from "rxjs/operators";
+import { FilterTask } from "@module-task/models/task-filter.model";
+import { map, switchMap, takeUntil, tap } from "rxjs/operators";
 import { Observable, of, Subject } from "rxjs";
 import {
   ChangeDetectionStrategy,
@@ -13,6 +14,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmDialogComponent } from "@module-shared/components/confirm-dialog/confirm-dialog.component";
 import { ConfirmData } from "@global-models/confirms-data.model";
+import { TaskFilterService } from "@module-task/services/task-filter/task-filter.service";
 
 @Component({
   selector: "app-task-list-land",
@@ -22,19 +24,23 @@ import { ConfirmData } from "@global-models/confirms-data.model";
 })
 export class TaskListLandComponent implements OnInit, OnDestroy {
   tasks$: Observable<ModelTask[]>;
+  tasksSync: ModelTask[] = []; //for filtering
   destroy$ = new Subject();
   constructor(
     private _taskHttp: TaskHttpService,
     private _snackBar: MatSnackBar,
     private _dialog: MatDialog,
-    private _cd: ChangeDetectorRef
+    private _cd: ChangeDetectorRef,
+    private _filterTasks: TaskFilterService
   ) {}
   ngOnDestroy(): void {
     this.destroy$.next();
   }
 
   ngOnInit(): void {
-    this.tasks$ = this._taskHttp.queryList();
+    this.tasks$ = this._taskHttp
+      .queryList()
+      .pipe(map((tasks) => (this.tasksSync = tasks)));
   }
 
   delete(model: ModelTask): void {
@@ -103,5 +109,12 @@ export class TaskListLandComponent implements OnInit, OnDestroy {
           this._snackBar.open("Deleted successfully!", "", { duration: 3000 });
         }
       });
+  }
+  filterChange(filter: FilterTask): void {
+    this.tasks$ = of(this._filterTasks.filter(this.tasksSync, filter));
+  }
+  clear(): void {
+    this.tasks$ = this._taskHttp.queryList();
+    this._cd.detectChanges();
   }
 }

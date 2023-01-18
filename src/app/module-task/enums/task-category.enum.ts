@@ -7,6 +7,12 @@ export const ENUM_TASK_CATEGORY = {
   BUREAUCRACY: "bureaucracy",
 } as const;
 
+export const ENUM_TASK_CATEGORY_FILTER = {
+  ALL: "all",
+  HOUSE: "house",
+  BUREAUCRACY: "bureaucracy",
+} as const;
+
 export const ARRAY_TASK_CATEGORY: ReadonlyArray<ListItem> = [
   {
     value: ENUM_TASK_CATEGORY.HOUSE,
@@ -16,4 +22,11 @@ export const ARRAY_TASK_CATEGORY: ReadonlyArray<ListItem> = [
     value: ENUM_TASK_CATEGORY.BUREAUCRACY,
     viewValue: "Bureaucracy",
   },
+];
+export const ARRAY_TASK_CATEGORY_FILTER: ReadonlyArray<ListItem> = [
+  {
+    value: ENUM_TASK_CATEGORY_FILTER.ALL,
+    viewValue: "All",
+  },
+  ...ARRAY_TASK_CATEGORY,
 ];

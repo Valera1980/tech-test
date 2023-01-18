@@ -1,9 +1,18 @@
-import { map, switchMap } from "rxjs/operators";
-import { Observable } from "rxjs";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { map, switchMap, takeUntil } from "rxjs/operators";
+import { Observable, of, Subject } from "rxjs";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import { TaskHttpService } from "@module-task/services/task-http/task-http.service";
 import { ModelTask } from "@module-task/models/task.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmDialogComponent } from "@module-shared/components/confirm-dialog/confirm-dialog.component";
+import { ConfirmData } from "@global-models/confirms-data.model";
 
 @Component({
   selector: "app-task-list-land",
@@ -11,39 +20,88 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ["./task-list-land.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskListLandComponent implements OnInit {
+export class TaskListLandComponent implements OnInit, OnDestroy {
   tasks$: Observable<ModelTask[]>;
+  destroy$ = new Subject();
   constructor(
     private _taskHttp: TaskHttpService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _dialog: MatDialog,
+    private _cd: ChangeDetectorRef
   ) {}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+  }
 
   ngOnInit(): void {
     this.tasks$ = this._taskHttp.queryList();
   }
 
   delete(model: ModelTask): void {
-    this.tasks$ = this._taskHttp.queryDelete(model.id).pipe(
-      map((data) => {
-        this._snackBar.open("Deleted successfully!", "", { duration: 3000 });
-        return data;
-      }),
-      switchMap(() => {
-        return this._taskHttp.queryList();
-      })
-    );
+    const ref = this._dialog.open(ConfirmDialogComponent, {
+      data: { msg: `Would you like delete "${model.label}"?` } as ConfirmData,
+      width: "350px",
+      disableClose: true,
+    });
+
+    ref
+      .afterClosed()
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((response: any) => {
+          if (response.action === "ok") {
+            return this._taskHttp
+              .queryDelete(model.id)
+              .pipe(map(() => ({ response })));
+          }
+          return of({ response });
+        }),
+        switchMap(({ response }) => {
+          if (response.action === "ok") {
+            this.tasks$ = this._taskHttp.queryList();
+            this._cd.detectChanges();
+          }
+          return of({ response });
+        })
+      )
+      .subscribe(({ response }) => {
+        if (response.action === "ok") {
+          this._snackBar.open("Deleted successfully!", "", { duration: 3000 });
+        }
+      });
   }
   done(model: ModelTask): void {
-    this.tasks$ = this._taskHttp.queryDone(model).pipe(
-      map((data) => {
-        this._snackBar.open("Marked as done successfully!", "", {
-          duration: 3000,
-        });
-        return data;
-      }),
-      switchMap(() => {
-        return this._taskHttp.queryList();
-      })
-    );
+    const ref = this._dialog.open(ConfirmDialogComponent, {
+      data: {
+        msg: `Would you like mark as done "${model.label}"?`,
+      } as ConfirmData,
+      width: "350px",
+      disableClose: true,
+    });
+
+    ref
+      .afterClosed()
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((response: any) => {
+          console.log(response);
+          if (response.action === "ok") {
+            return this._taskHttp
+              .queryDone(model)
+              .pipe(map(() => ({ response })));
+          }
+          return of({ response });
+        }),
+        switchMap(({ response }) => {
+          this.tasks$ = this._taskHttp.queryList();
+          this._cd.detectChanges();
+          return of({ response });
+        })
+      )
+      .subscribe(({ response }) => {
+        if (response.action === "ok") {
+          this._snackBar.open("Deleted successfully!", "", { duration: 3000 });
+        }
+      });
   }
 }

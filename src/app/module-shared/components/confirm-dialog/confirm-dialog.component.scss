@@ -1,0 +1,18 @@
+.confirm {
+    padding: 15px 10px;
+  
+    &__body {
+      margin-bottom: 24px;
+    }
+    &__text {
+      font-size: 16px;
+    }
+    &__bar{
+        & > * {
+            &:not(:last-child){
+                margin-right: 8px;
+            }
+        }
+    }
+   
+  }

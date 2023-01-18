@@ -53,12 +53,12 @@ export class TaskHttpService {
       .pipe(catchError((e) => throwError(e)));
   }
   queryDone(model: ModelTask): Observable<unknown> {
-    const date = new Date();
+    const done = model.done ? model.done : new Date();
     return this._http
       .patch<unknown>(this._api + "/" + model.id, {
         category: model.category,
         description: model.description,
-        done: getStringForData(model.done as Date),
+        done: getStringForData(done as Date),
         label: model.label,
       })
       .pipe(catchError((e) => throwError(e)));

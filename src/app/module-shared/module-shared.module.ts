@@ -10,9 +10,11 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { ConfirmDialogComponent } from "./components/confirm-dialog/confirm-dialog.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
-  declarations: [],
+  declarations: [ConfirmDialogComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -25,6 +27,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatNativeDateModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    MatDialogModule,
   ],
   exports: [
     MatTableModule,
@@ -37,6 +40,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatNativeDateModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    ConfirmDialogComponent,
+    MatDialogModule,
   ],
 })
 export class ModuleShared {}

@@ -8,32 +8,11 @@
       "done": "17-1-2023"
     },
     {
-      "id": 2,
-      "label": "Taxes",
-      "description": "Start doing my taxes and contact my accountant john for advice",
       "category": "bureaucracy",
-      "done": "17-1-2023"
-    },
-    {
-      "category": "bureaucracy",
-      "description": "11223344",
-      "done": "2023-01-17T22:00:00.000Z",
-      "label": "112233",
-      "id": 3
-    },
-    {
-      "category": "bureaucracy",
-      "description": "432107",
-      "done": "25-1-2023",
-      "label": "43210",
-      "id": 4
-    },
-    {
-      "category": "bureaucracy",
-      "description": "456546456456",
-      "done": "false",
-      "label": "456456456",
-      "id": 5
+      "description": "Label 77777",
+      "done": "18-1-2023",
+      "label": "Label 777",
+      "id": 2
     }
   ]
 }

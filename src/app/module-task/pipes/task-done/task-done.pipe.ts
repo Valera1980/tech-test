@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "taskDone",
 })
 export class TaskDonePipe implements PipeTransform {
-  transform(value: Date | boolean): unknown {
+  transform(value: Date | boolean): string {
     if (typeof value === "boolean") {
       return "false";
     }

@@ -9,7 +9,7 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "taskCategory",
 })
 export class TaskCategoryPipe implements PipeTransform {
-  transform(value: Values<typeof ENUM_TASK_CATEGORY>): unknown {
+  transform(value: Values<typeof ENUM_TASK_CATEGORY>): string {
     return (
       ARRAY_TASK_CATEGORY.find((tc) => tc.value === value)?.viewValue ??
       "unknown"
